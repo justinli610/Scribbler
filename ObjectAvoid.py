@@ -1,6 +1,6 @@
 from myro import *
 
-initialize("com8")
+initialize("com6")
 
 class Robot:
     initialTurn = False
@@ -9,7 +9,7 @@ class Robot:
 
     #values for turning at optimal speed
     turningValue = 1
-    turningTime = 1
+    turningTime = 0.75
 
     #values for extra moving forward optimal amount to get body of robot past obstacle
     extraValue= 1
@@ -19,8 +19,8 @@ class Robot:
     driveValue = 1.0
 
     #distance sensitivity for sensors
-    sideDistance = 500
-    frontDistance = 500
+    sideDistance = 400
+    frontDistance = 1000
 
 
     #for moving the robot the distance forward equivalent to the length of the robot
@@ -30,10 +30,10 @@ class Robot:
 
     #moves robot forward while using front sensor and stops when too close
     def moveForwardDetectFront(self):
+
         while not(self.frontTooClose()):
             motors(self.driveValue, self.driveValue)
         self.moveExtraBitForward()
-        global initialTurn
         initialTurn = True
         stop()
 
@@ -42,7 +42,7 @@ class Robot:
         while not(self.rightClear()):
             motors(self.driveValue, self.driveValue)
             if self.frontTooClose():
-                restart=True
+                self.restart=True
                 stop()
                 return
             if self.initialTurn:
@@ -64,13 +64,20 @@ class Robot:
 
     #detects distance from closest object in front
     def frontTooClose(self):
-        if getObstacle('middle')<self.frontDistance:
+        print "Front: %d\n" % getObstacle('middle')
+        if getObstacle('middle')>self.frontDistance:
             return True
 
     #detects distance from closest object to the right
     def rightClear(self):
         if getObstacle('right')>self.sideDistance:
             return True
+
+def sensorTest():
+    front = getObstacle('middle')
+    right = getObstacle('right')
+    left = getObstacle('left')
+    print "Front sensor: %d\t Right sensor: %d\tLeft sensor: %d" % (front,right,left)
 
 def main():
     setName("Paula")
@@ -80,8 +87,8 @@ def main():
         turnLeft(test.turningValue,test.turningTime)
         for x in xrange(0,2):
             test.moveForwardDetectRight()
-            if restart:
-                restart = False
+            if test.restart:
+                test.restart = False
                 continue
             turnRight(test.turningValue,test.turningTime)
         test.moveForwardSetTime()
