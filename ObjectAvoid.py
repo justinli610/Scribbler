@@ -1,87 +1,90 @@
 from myro import *
 
-initialize("comX")
+initialize("com8")
 
-initialTurn = false
-initialTurnTime = 0
-restart = false
+class Robot:
+    initialTurn = False
+    initialTurnTime = 0
+    restart= False
 
-#values for turning at optimal speed
-turningValue = 1
-turningTime = 1
+    #values for turning at optimal speed
+    turningValue = 1
+    turningTime = 1
 
-#values for extra moving forward optimal amount to get body of robot past obstacle
-extraValue = 1
-extraTime = 1
+    #values for extra moving forward optimal amount to get body of robot past obstacle
+    extraValue= 1
+    extraTime= 1
 
-#for general driving forward power
-driveValue = 1.0
+    #for general driving forward power
+    driveValue = 1.0
 
-#distance sensitivity for sensors
-sideDistance = 100
-frontDistance = 50
+    #distance sensitivity for sensors
+    sideDistance = 500
+    frontDistance = 500
 
 
-#for moving the robot the distance forward equivalent to the length of the robot
-#this is because the sensors are located on the front of the robot
-def moveExtraBitForward():
-    forward(extraValue, extraTime)
-    
-#moves robot forward while using front sensor and stops when too close
-def moveForwardDetectFront():
-    while !frontTooClose():
-        motors(driveValue, driveValue)
-    moveExtraBitForward()
-    initialTurn = true
-    stop()
+    #for moving the robot the distance forward equivalent to the length of the robot
+    #this is because the sensors are located on the front of the robot
+    def moveExtraBitForward(self):
+        forward(self.extraValue, self.extraTime)
 
-#moves robot forward while using right sensor and stops when too close
-def moveForwardDetectRight():
-    while !rightClear():
-        motors(driveValue, driveValue)
-        if frontTooClose():
-            restart=true
-            stop()
-            return
-        if initialTurn:
-            initialTurnTime++
-    if initialTurn:
-        initialTurn = false
-    moveExtraBitForward()
-    stop()
+    #moves robot forward while using front sensor and stops when too close
+    def moveForwardDetectFront(self):
+        while not(self.frontTooClose()):
+            motors(self.driveValue, self.driveValue)
+        self.moveExtraBitForward()
+        global initialTurn
+        initialTurn = True
+        stop()
 
-#move forward the original distance travelled to the left of the object
-def moveForwardSetTime():
-    while initialTurnTime>0:
-        motors(driveValue, driveValue)
-        initialTurnTime--
-        if frontTooClose():
-            stop()
-            return
-    stop()
-        
-#detects distance from closest object in front
-def frontTooClose():
-    if getObstacle('middle')<frontDistance:
-        return true
+    #moves robot forward while using right sensor and stops when too close
+    def moveForwardDetectRight(self):
+        while not(self.rightClear()):
+            motors(self.driveValue, self.driveValue)
+            if self.frontTooClose():
+                restart=True
+                stop()
+                return
+            if self.initialTurn:
+                self.initialTurnTime+=1
+        if self.initialTurn:
+            initialTurn = False
+        self.moveExtraBitForward()
+        stop()
 
-#detects distance from closest object to the right
-def rightClear():
-    if getObstacle('right')>sideDistance
-        return true
+    #move forward the original distance travelled to the left of the object
+    def moveForwardSetTime(self):
+        while self.initialTurnTime>0:
+            motors(self.driveValue, self.driveValue)
+            self.initialTurnTime-=1
+            if self.frontTooClose():
+                stop()
+                return
+        stop()
+
+    #detects distance from closest object in front
+    def frontTooClose(self):
+        if getObstacle('middle')<self.frontDistance:
+            return True
+
+    #detects distance from closest object to the right
+    def rightClear(self):
+        if getObstacle('right')>self.sideDistance:
+            return True
 
 def main():
     setName("Paula")
-    while true:
-        moveForwardDetectFront()
-        turnLeft(turningValue,turningTime)
+    test=Robot()
+    while True:
+        test.moveForwardDetectFront()
+        turnLeft(test.turningValue,test.turningTime)
         for x in xrange(0,2):
-            moveForwardDetectRight()
+            test.moveForwardDetectRight()
             if restart:
-                restart = false
+                restart = False
                 continue
-            turnRight(turningValue,turningTime)
-        moveForwardSetTime()
-        turnLeft(turningValue,turningTime)
+            turnRight(test.turningValue,test.turningTime)
+        test.moveForwardSetTime()
+        turnLeft(test.turningValue,test.turningTime)
             
 main()
