@@ -9,18 +9,18 @@ class Robot:
 
     #values for turning at optimal speed
     turningValue = 1
-    turningTime = 0.75
+    turningTime = 0.73
 
     #values for extra moving forward optimal amount to get body of robot past obstacle
     extraValue= 1
     extraTime= 1
 
     #for general driving forward power
-    driveValue = 1.0
+    driveValue = 0.5
 
     #distance sensitivity for sensors
     sideDistance = 400
-    frontDistance = 1000
+    frontDistance = 1100
 
 
     #for moving the robot the distance forward equivalent to the length of the robot
@@ -30,10 +30,11 @@ class Robot:
 
     #moves robot forward while using front sensor and stops when too close
     def moveForwardDetectFront(self):
-
+        values = [0, 0, 0]
         while not(self.frontTooClose()):
             motors(self.driveValue, self.driveValue)
-        self.moveExtraBitForward()
+
+        #self.moveExtraBitForward()
         initialTurn = True
         stop()
 
@@ -41,10 +42,10 @@ class Robot:
     def moveForwardDetectRight(self):
         while not(self.rightClear()):
             motors(self.driveValue, self.driveValue)
-            if self.frontTooClose():
+            """if self.frontTooClose():
                 self.restart=True
                 stop()
-                return
+                return"""
             if self.initialTurn:
                 self.initialTurnTime+=1
         if self.initialTurn:
@@ -54,12 +55,12 @@ class Robot:
 
     #move forward the original distance travelled to the left of the object
     def moveForwardSetTime(self):
-        while self.initialTurnTime>0:
+        while self.initialTurnTime*2>0:
             motors(self.driveValue, self.driveValue)
             self.initialTurnTime-=1
-            if self.frontTooClose():
+            """if self.frontTooClose():
                 stop()
-                return
+                return"""
         stop()
 
     #detects distance from closest object in front
@@ -87,10 +88,12 @@ def main():
         turnLeft(test.turningValue,test.turningTime)
         for x in xrange(0,2):
             test.moveForwardDetectRight()
-            if test.restart:
+            """if test.restart:
                 test.restart = False
-                continue
+                continue"""
+            test.moveExtraBitForward()
             turnRight(test.turningValue,test.turningTime)
+            test.moveExtraBitForward()
         test.moveForwardSetTime()
         turnLeft(test.turningValue,test.turningTime)
             
