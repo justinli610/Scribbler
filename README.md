@@ -3,7 +3,7 @@ Scribbler
 SE 101 Group Project
 
 ##Introduction
-The Scribbler robot group project is there to introduce the first year Software Engineering at University of Waterloo to working with hardware limitations in real life. The Myro Scribbler bot is equipped with extremely terrible hardware, which makes it the perfect piece of hardware for prospective software engineers to work with.
+The Scribbler robot group project exists in order to introduce the first year Software Engineering at University of Waterloo to working with hardware limitations in real life. The Myro Scribbler bot is equipped with extremely terrible hardware, which makes it the perfect piece of hardware for prospective software engineers to work with.
   Initially the objective of our team is to write a program that will make the robot avoid obstacles with the help of its terrible sensors. After this initial demo, we will start working towards our main project: A text-speech and speech-text program.
 
 ##Obstacle Avoidance
