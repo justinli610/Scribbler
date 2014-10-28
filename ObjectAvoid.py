@@ -16,19 +16,19 @@ class Robot:
     restart= False
 
     #values for turning at optimal speed
-    turningValue = 1
-    turningTime = 0.73
+    turningValue = 0.5
+    turningTime = 1.38
 
     #values for extra moving forward optimal amount to get body of robot past obstacle
-    extraValue= 1
-    extraTime= 1
+    extraValue= 0.5
+    extraTime= 1.8
 
     #for general driving forward power
     driveValue = 0.5
 
     #distance sensitivity for sensors
     sideDistance = 0
-    frontDistance = 1050
+    frontDistance = 1090
 
 
     #for moving the robot the distance forward equivalent to the length of the robot
@@ -49,6 +49,7 @@ class Robot:
 
             if count > 2:
                 count = 0
+            print "%r %r %r" % (values[0], values[1], values[2])
 
         #self.moveExtraBitForward()
         initialTurn = True
@@ -87,8 +88,9 @@ class Robot:
 
     #detects distance from closest object in front
     def frontTooClose(self):
-        print "Front: %d" % getObstacle('middle')
-        if getObstacle('middle')>self.frontDistance:
+        dist = getObstacle('middle')
+        print "Front: %d" % dist
+        if dist>self.frontDistance:
             return True
 
     #detects distance from closest object to the right
@@ -96,6 +98,29 @@ class Robot:
         print "Right: %d" % getObstacle('right')
         if getObstacle('right')<=self.sideDistance:
             return True
+
+def checkContinue(): # True if clear
+    time = currentTime()
+
+    #Turn to right
+    turnRight(0.5, 0.7)
+
+    total = 0
+    #Measure a bunch of values and check if they're good
+    for x in xrange(0, 10):
+        total += getObstacle('right')
+
+    print total / 10
+
+    if total / 10 > 500:
+        flag = False # Obstacle present, repeat
+    else:
+        flag = True
+
+    #Turn back to left
+    turnLeft(0.5, 0.7)
+
+    return (currentTime() - time, flag) #time that has elapsed
 
 def sensorTest():
     front = getObstacle('middle')
@@ -106,18 +131,48 @@ def sensorTest():
 def main():
     setName("Paula")
     test=Robot()
+    startTime = currentTime()
+    totalTime = 0
     while True:
         test.moveForwardDetectFront()
         turnLeft(test.turningValue,test.turningTime)
-        for x in xrange(0,2):
+        flag = False
+
+        while not flag:
+            forward(0.5, 0.6)
+            (time, flag) = checkContinue()
+            totalTime -= time;
+
+        totalTime += currentTime() - startTime
+
+        test.moveExtraBitForward()
+
+        turnRight(test.turningValue, test.turningTime)
+        # Side of box
+        test.moveExtraBitForward()
+        flag = False
+        while not flag:
+            forward(0.5, 0.6)
+            (time, flag) = checkContinue()
+        test.moveExtraBitForward()
+        turnRight(test.turningValue,test.turningTime + 0.1)
+
+        #final side
+        #test.moveExtraBitForward()
+
+        startTime = currentTime()
+
+        while currentTime() < startTime + totalTime:
+            forward(0.5, 0.1)
+
+        turnLeft(test.turningValue, test.turningTime)
+
+        """for x in xrange(0,2):
             test.moveForwardDetectRight()
-            """if test.restart:
-                test.restart = False
-                continue"""
             test.moveExtraBitForward()
             turnRight(test.turningValue,test.turningTime)
             test.moveExtraBitForward()
         test.moveForwardSetTime()
-        turnLeft(test.turningValue,test.turningTime)
+        turnLeft(test.turningValue,test.turningTime)"""
             
 main()
