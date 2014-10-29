@@ -38,10 +38,11 @@ class Robot:
 
     #moves robot forward while using front sensor and stops when too close
     def moveForwardDetectFront(self):
-        values = [False, False, False]
+        values = [False, False, False] #assigns all the values to be false
         count = 0
-        values[count] = self.frontTooClose()
+        values[count] = self.frontTooClose() #
         count += 1
+		#the loop will run until all the values becomes True
         while not(values[0] and values[1] and values[2]):
             motors(self.driveValue, self.driveValue)
             values[count] = self.frontTooClose()
@@ -52,6 +53,7 @@ class Robot:
             print "%r %r %r" % (values[0], values[1], values[2])
 
         #self.moveExtraBitForward()
+		#tells the program that the initial turn has been executed
         initialTurn = True
         stop()
 
@@ -99,6 +101,7 @@ class Robot:
         if getObstacle('right')<=self.sideDistance:
             return True
 
+#This function is used to keep detecting objects on the right so that the robot knows when it can turn right.
 def checkContinue(): # True if clear
     time = currentTime()
 
@@ -134,10 +137,13 @@ def main():
     startTime = currentTime()
     totalTime = 0
     while True:
+		#keeps moving front until it detects something
         test.moveForwardDetectFront()
+		#turns left when it detects something
         turnLeft(test.turningValue,test.turningTime)
-        flag = False
-
+        flag = False #tells the program that the robot is in the process of moving around the obstacle
+		
+		#runs the loop when the robot needs to keep track of time
         while not flag:
             forward(0.5, 0.6)
             (time, flag) = checkContinue()
