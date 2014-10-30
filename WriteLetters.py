@@ -72,9 +72,9 @@ def a():
     arc(360)#Break up the movements because bug with angles > 400
     arc(90)
     turn(180)
-    line(3)
+    line(2)
     turn(90)
-    line(3)         #slightly too far
+    line(3)
 
 def c():
     turn(180)
@@ -85,7 +85,7 @@ def c():
 
 def t():
     turn(90)
-    line(5)         #needs to be further
+    line(5)
     line(-1)
     turn(90)
     line(1)
