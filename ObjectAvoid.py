@@ -77,8 +77,7 @@ def checkContinue(): # True if clear
     print total / 10
 	#if the average is greater than 500
     if total / 10 > 500:
-        flag = False #then Obstacle present
-	#else flag becomes true, telling the robot that there is nothing on its right
+        flag = False
 	else:
         flag = True
 
