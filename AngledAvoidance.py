@@ -24,7 +24,7 @@ class Robot:
 
     #distance sensitivity for sensors
     sideDistance = 0
-    frontDistance = 1090
+    frontDistance = 900
 
 
     #for moving the robot the distance forward equivalent to the length of the robot
@@ -77,9 +77,8 @@ def checkContinue(): # True if clear
     print total / 10
 	#if the average is greater than 500
     if total / 10 > 500:
-        flag = False #then Obstacle present
-	#else flag becomes true, telling the robot that there is nothing on its right
-	else:
+        flag = False
+    else:
         flag = True
 
     #Turn back to left after the checking is done
