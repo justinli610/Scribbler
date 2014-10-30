@@ -6,7 +6,7 @@ def drawWord(a):
     for i in xrange(len(a)):
         drawLetter(a[i])
 
-def drawLetter(arg):
+def drawLetter(arg):    #include other letters
     if (arg == 'a'):
         a()
         return
@@ -76,12 +76,60 @@ def a():
     turn(90)
     line(3)
 
+def b():    #test
+    turn(90)
+    line(3)
+    turn(180)
+    line(2)
+    arc(360)
+    turn(180)
+    line(1)
+    turn(90)
+    line(3)
+
 def c():
     turn(180)
     arc(-180)
     turn(180)
     arc(180)
     line(3)
+
+def d():    #test
+    line(3)
+    arc(360)
+    arc(90)
+    turn(90)
+    line(3)
+    turn(180)
+    line(3)
+    turn(90)
+    line(3)
+
+def e():    #needs testing
+    line(3)
+    turn(180)
+    arc(270)
+    turn(90)
+    line(2)
+    turn(-90)
+    arc(100)
+    arc(-10)
+    line(4)
+
+def f():
+def g():
+def h():
+def i():
+def j():
+def k():
+def l():
+def m():
+def n():
+def o():
+def p():
+def q():
+def r():
+def s():
 
 def t():
     turn(90)
@@ -96,6 +144,12 @@ def t():
     turn(90)
     line(3)
 
+def u():
+def v():
+def w():
+def x():
+def y():
+def z():
 
 #arc(360)
 #turn(360)
