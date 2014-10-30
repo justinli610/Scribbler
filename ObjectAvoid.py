@@ -51,41 +51,6 @@ class Robot:
             if count > 2:
                 count = 0
             print "%r %r %r" % (values[0], values[1], values[2])
-
-        #self.moveExtraBitForward()
-		#tells the program that the initial turn has been executed
-        initialTurn = True
-        stop()
-
-    #moves robot forward while using right sensor and stops when too close
-    def moveForwardDetectRight(self):
-        values = [False, False, False, False, False]
-        count = 0
-        values[count] = self.rightClear()
-        count += 1
-
-        while not(values[0] and values[1] and values[2] and values[3] and values[4]):
-            motors(self.driveValue, self.driveValue)
-            values[count] = self.rightClear()
-            count += 1
-
-            if count > 4:
-                count = 0
-            if self.initialTurn:
-                self.initialTurnTime+=1
-        if self.initialTurn:
-            initialTurn = False
-        #self.moveExtraBitForward()
-        stop()
-
-    #move forward the original distance travelled to the left of the object
-    def moveForwardSetTime(self):
-        while self.initialTurnTime*4>0:
-            motors(self.driveValue, self.driveValue)
-            self.initialTurnTime-=1
-            """if self.frontTooClose():
-                stop()
-                return"""
         stop()
 
     #detects distance from closest object in front
@@ -105,24 +70,25 @@ class Robot:
 def checkContinue(): # True if clear
     time = currentTime()
 
-    #Turn to right
+    #Turn slightly right
     turnRight(0.5, 0.7)
 
     total = 0
-    #Measure a bunch of values and check if they're good
+    #Measure the right sensor value ten times
     for x in xrange(0, 10):
         total += getObstacle('right')
-
+	#calculate the average of the ten values
     print total / 10
-
+	#if the average is greater than 500
     if total / 10 > 500:
-        flag = False # Obstacle present, repeat
-    else:
+        flag = False #then Obstacle present
+	#else flag becomes true, telling the robot that there is nothing on its right
+	else:
         flag = True
 
-    #Turn back to left
+    #Turn back to left after the checking is done
     turnLeft(0.5, 0.7)
-
+	#return the flag (as the loop is outside the function) and the time elapsed to do the checking
     return (currentTime() - time, flag) #time that has elapsed
 
 def sensorTest():
@@ -137,25 +103,29 @@ def main():
     startTime = currentTime()
     totalTime = 0
     while True:
-		#keeps moving front until it detects something
+		#keeps moving front until it detects something and then turns left
         test.moveForwardDetectFront()
-		#turns left when it detects something
         turnLeft(test.turningValue,test.turningTime)
+		
+		#First part of the 'moving around the box'
         flag = False #tells the program that the robot is in the process of moving around the obstacle
 		
 		#runs the loop when the robot needs to keep track of time
         while not flag:
             forward(0.5, 0.6)
-            (time, flag) = checkContinue()
+            (time, flag) = checkContinue() 
             totalTime -= time;
-
-        totalTime += currentTime() - startTime
-
+		#loop breaks when the right sensors detect that there is nothing on the right
+		#totalTime stores the actual time the robot spent moving, later used to move back to its position
+        totalTime += currentTime() - startTime 
+		
+		#move the extra bit forward and then turnRight
         test.moveExtraBitForward()
-
         turnRight(test.turningValue, test.turningTime)
+		
         # Side of box
         test.moveExtraBitForward()
+		#do the same thing as the previous section without keeping track of time
         flag = False
         while not flag:
             forward(0.5, 0.6)
@@ -164,21 +134,12 @@ def main():
         turnRight(test.turningValue,test.turningTime + 0.1)
 
         #final side
-        #test.moveExtraBitForward()
-
         startTime = currentTime()
-
+		#moves until the tracked time is up
         while currentTime() < startTime + totalTime:
             forward(0.5, 0.1)
-
+		
+		#turns left after the robot gets to where it was.
         turnLeft(test.turningValue, test.turningTime)
-
-        """for x in xrange(0,2):
-            test.moveForwardDetectRight()
-            test.moveExtraBitForward()
-            turnRight(test.turningValue,test.turningTime)
-            test.moveExtraBitForward()
-        test.moveForwardSetTime()
-        turnLeft(test.turningValue,test.turningTime)"""
             
 main()
