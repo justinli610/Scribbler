@@ -11,10 +11,6 @@ Need to get final path 20 degrees from exiting straight
 '''
 
 class Robot:
-    initialTurn = False
-    initialTurnTime = 0
-    restart= False
-
     #values for turning at optimal speed
     turningValue = 0.5
     turningTime = 1.38
@@ -40,7 +36,7 @@ class Robot:
     def moveForwardDetectFront(self):
         values = [False, False, False] #assigns all the values to be false
         count = 0
-        values[count] = self.frontTooClose() #
+        values[count] = self.frontTooClose()
         count += 1
 		#the loop will run until all the values becomes True
         while not(values[0] and values[1] and values[2]):

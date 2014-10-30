@@ -25,9 +25,7 @@ returning to within 20° of the original trajectory.
 * turningValue and turningTime
 * extraValue and extraTime
 * driveValue
-* sideDistance and frontDistance
-
-   stores the sensitivity cap for the sensors
+* sideDistance and frontDistance: stores the sensitivity cap for the sensors
 
 ####List of Functions
 * **frontTooClose():** returns true if the distance of the front sensor is less that allowed frontDistance value.
