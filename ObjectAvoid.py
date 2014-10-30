@@ -16,7 +16,7 @@ class Robot:
     turningTime = 1.38
 
     #values for extra moving forward optimal amount to get body of robot past obstacle
-    extraValue= 0.5
+    extraValue= 0.58
     extraTime= 1.8
 
     #for general driving forward power
