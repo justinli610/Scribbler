@@ -22,14 +22,14 @@ move(translate, rotate)
 First param: 1, forward, -1, backwards, fullspeed
 Second param: 1, left, -1, right, fullspeed
 '''
-def arc(degrees,radius = 1):
+def arc(degrees,radius = 1):    #may need to change function to implement different radii
     print ("Arc: " + str(degrees))
     #speed = 0.2
     #moveTime = 0.035;#Tweek this value so that it turns the correct amount
     speed = 0.3
     moveTime = 0.0232
     if (degrees >= 0):
-        move(speed,speed/radius)
+        move(speed,speed/radius)        '''try changing to motors(left speed?, right speed?) +stop()'''
     else:
         move(speed,-speed/radius)
     print(abs(degrees)*moveTime)
@@ -105,32 +105,157 @@ def d():    #test
     turn(90)
     line(3)
 
-def e():    #needs testing
+def e():    #test
     line(3)
     turn(180)
-    arc(270)
-    turn(90)
-    line(2)
+    arc(-270)
     turn(-90)
+    line(2)
+    turn(90)
     arc(100)
     arc(-10)
     line(4)
 
-def f():
-def g():
-def h():
-def i():
-def j():
-def k():
-def l():
-def m():
-def n():
-def o():
+def f():    #test
+    turn(90)
+    line(5)
+    arc(180)
+    turn(180)
+    arc(-180)
+    line(-1)
+    turn(90)
+    line(2)
+    line(-4)
+    line(2)
+    turn(90)
+    line(4)
+    turn(90)
+    line(3)
+def g(): #test
+    line(3)
+    arc(360)
+    arc(90)
+    turn(180)
+    line(4)
+    arc(-180)
+    turn(180)
+    arc(180)
+    line(-2)
+    turn(90)
+    line(3)
+def h():#test
+    turn(90)
+    line(5)
+    line(-3)
+    arc(-180)
+    line(2)
+    rotate(90)
+    line(3)
+def i():#test
+    turn(90)
+    line(3)
+    turn(-90)
+    arc(360,0.5)    #change function to use different radii
+    turn(-90)
+    line(3)
+    turn(90)
+    line(3)
+def j():#test
+    turn(90)
+    line(3)
+    turn(-90)
+    arc(360,0.5)    #change function to use different radii
+    turn(-90)
+    line(5)
+    arc(-180)
+    turn(180)
+    arc(180)
+    line(2)
+    turn(-90)
+    line(3)
+def k():#test
+    turn(90)
+    line(5)
+    line(-3)
+    turn(-45)
+    line(2)
+    line(-2)
+    turn(-90)
+    line(2)
+    turn(45)
+    line(3)
+def l():#test
+    turn(90)
+    line(5)
+    line(-5)
+    turn(-90)
+    line(3)
+def m():#test
+    turn(90)
+    line(3)
+    arc(-180)
+    line(3)
+    turn(180)
+    line(3)
+    arc(-180)
+    line(3)
+    turn(-90)
+    line(3)
+def n():#test
+    turn(90)
+    line(3)
+    arc(-180)
+    line(3)
+    turn(-90)
+    line(3)
+def o():#test
+    line(3)
+    arc(360)
+    line(3)
 def p():
-def q():
-def r():
-def s():
-
+    turn(-90)
+    line(2)
+    line(-5)
+    line(1)
+    arc(360)
+    line(2)
+    turn(90)
+    line(3)
+def q():#test
+    line(3)
+    arc(360)
+    arc(90)
+    line(2)
+    line(-5)
+    turn(-45)
+    line(2)
+    line(-2)
+    turn(45)
+    line(2)
+    turn(-90)
+    line(3)
+def r():#test
+    turn(90)
+    line(3)
+    line(-1)
+    arc(-180)
+    turn(180)
+    arc(180)
+    line(2)
+    turn(90)
+    line(3)
+def s():#test   currently improportionally big, so if arc() can be changed to accomodate radii, then change s()
+    line(3)
+    turn(180)
+    arc(-90)
+    turn(180)
+    arc(270)
+    arc(-270)
+    turn(180)
+    arc(270)
+    arc(-180)
+    turn(180)
+    line(3)
 def t():
     turn(90)
     line(5)
@@ -143,13 +268,86 @@ def t():
     line(4)
     turn(90)
     line(3)
-
-def u():
-def v():
-def w():
-def x():
-def y():
-def z():
+def u():#test
+    line(3)
+    turn(180)
+    arc(-90)
+    line(2)
+    turn(180)
+    line(2)
+    arc(180)
+    line(2)
+    turn(180)
+    line(3)
+    turn(90)
+    line(3)
+def v():#test
+    line(3)
+    turn(110)
+    line(2)
+    line(-2)
+    turn(-40)
+    line(2)
+    line(-2)
+    turn(-70)
+    line(3)
+def w():#test
+    line(3)
+    turn(110)
+    line(2)
+    line(-2)
+    turn(-40)
+    line(2)
+    turn(-140)
+    line(2)
+    turn(140)
+    line(2)
+    line(-2)
+    turn(-70)
+    line(3)
+def x():#test
+    turn(60)
+    line(2)
+    line(-1)
+    turn(40)
+    line(1)
+    line(-2)
+    turn(-110)
+    line(3)
+def y():#test
+    line(3)
+    turn(110)
+    line(2)
+    line(-2)
+    turn(-40)
+    line(2)
+    line(-4)
+    line(2)
+    turn(-60)
+    line(3)
+def z():#test
+    line(3)
+    turn(90)
+    line(0.5)
+    turn(90)
+    line(1.5)   #might be weird
+    turn(-135)
+    line(2)
+    turn(135)
+    line(1.5)
+    line(-1.5)
+    turn(45)
+    line(2)
+    turn(135)
+    line(1.5)
+    turn(-90)
+    line(0.5)
+    turn(90)
+    line(3)
+def space():
+    line(3)
+    
+    
 
 #arc(360)
 #turn(360)
