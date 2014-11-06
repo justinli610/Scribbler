@@ -61,6 +61,16 @@ def turn(degrees):
         turnRight(speed, abs(degrees)*turnTime)
     wait(0.3)#Let the robot wheels recover
 
+def	returnToBase():
+	beep(1, 440)
+	ask("Remove drawing device and press \"OK\"")
+	print ("Returning to baseline")
+	turn(-90)
+	while get("line")[0] == 0 or get("line")[1] == 0:
+		forward(0.3, 0.5)
+	stop()
+	turn(90)
+	
 '''
 Always move line(3) after drawing the letter to make space for the next letter
 '''
