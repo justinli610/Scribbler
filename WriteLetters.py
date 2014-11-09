@@ -1,4 +1,6 @@
 from myro import *
+import speech
+import time
 
 initialize("com6")
 
@@ -97,13 +99,25 @@ def t():
     line(3)
 
 
+
 #arc(360)
 #turn(360)
 #a()
 #c()
 #t()
-drawWord("cat")
+#drawWord("cat")
+phrase = speech.input()
+print phrase
+drawWord (phrase);
 
+def callback(phrase, listener):
+    if phrase == "stop":
+        listener.stoplistening()
+    drawWord(phrase)
+
+listener = speech.listenforanything(callback)
+while listener.islistening():
+    time.sleep(.5)
 #So you don't have to reconnect everytime
 '''
 while True:
