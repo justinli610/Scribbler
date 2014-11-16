@@ -1,4 +1,6 @@
 from myro import *
+import speech
+import time
 
 initialize("com6")
 
@@ -10,11 +12,26 @@ def drawLetter(arg):    #include other letters
     if (arg == 'a'):
         a()
         return
+    if (arg == 'b'):
+        b()
+        return
     if (arg == 'c'):
         c()
         return
+    if (arg == 'd'):
+        d()
+        return
+    if (arg == 'e'):
+        e()
+        return
+    if (arg == 'f'):
+        f()
+        return
     if (arg == 't'):
         t()
+        return
+    if (arg == 's'):
+        s()
         return
     return
 '''
@@ -22,21 +39,21 @@ move(translate, rotate)
 First param: 1, forward, -1, backwards, fullspeed
 Second param: 1, left, -1, right, fullspeed
 '''
-def arc(degrees,radius = 1):    #may need to change function to implement different radii
+'''def arc(degrees,radius = 1):    #may need to change function to implement different radii
     print ("Arc: " + str(degrees))
     #speed = 0.2
     #moveTime = 0.035;#Tweek this value so that it turns the correct amount
     speed = 0.3
     moveTime = 0.0232
     if (degrees >= 0):
-        move(speed,speed/radius)        '''try changing to motors(left speed?, right speed?) +stop()'''
+        move(speed,speed/radius)       #try changing to motors(left speed?, right speed?) +stop()
     else:
         move(speed,-speed/radius)
     print(abs(degrees)*moveTime)
     wait(abs(degrees)*moveTime)
     move(0,0)
     wait(0.3)#Let the robot wheels recover
-
+'''
 def line(length):
     print ("Line: " + str(length))
     #speed = 0.3
@@ -61,6 +78,24 @@ def turn(degrees):
         turnRight(speed, abs(degrees)*turnTime)
     wait(0.3)#Let the robot wheels recover
 
+#Small turn (e.g. for 's')
+def arc(degrees):
+    print ("Turn: " + str(degrees))
+    #speed = 0.2
+    #turnTime = 0.0348;
+    speed = 0.2
+    turnPower = 0.4 *degrees/abs(degrees)
+    move(speed, turnPower)
+    """if degrees > 0:#Left turn, CCW
+        turnPower = degrees*time
+    else:#Right turn, CW
+        turnPower = abs(degrees)*time"""
+
+    while timeRemaining(.0165*abs(degrees)):
+        i = 0
+    move(0, 0)
+    wait(0.3)#Let the robot wheels recover
+
 '''
 Always move line(3) after drawing the letter to make space for the next letter
 '''
@@ -68,98 +103,100 @@ Always move line(3) after drawing the letter to make space for the next letter
 #Draws an a
 #Also includes the return movements to the baseline
 def a():
-    line(3)#To clear more space for the circle
+    space()#To clear more space for the circle
     arc(360)#Break up the movements because bug with angles > 400
     arc(90)
     turn(180)
     line(2)
     turn(90)
-    line(3)
+    space()
 
-def b():    #test
+def b():
     turn(90)
+    line(4)
+    turn(180)
     line(3)
-    turn(180)
-    line(2)
-    arc(360)
-    turn(180)
+    arc(360 + 30)
     line(1)
     turn(90)
-    line(3)
+    space()
 
 def c():
     turn(180)
     arc(-180)
     turn(180)
     arc(180)
-    line(3)
+    space()
 
-def d():    #test
-    line(3)
-    arc(360)
+def d():
+    space()
+    arc(360+30)
     arc(90)
-    turn(90)
     line(3)
     turn(180)
-    line(3)
+    line(4)
     turn(90)
-    line(3)
+    space()
 
-def e():    #test
-    line(3)
+def e():    #finetune
+    space()
     turn(180)
-    arc(-270)
+    arc(-270-10)
     turn(-90)
-    line(2)
+    line(1.8)
     turn(90)
-    arc(100)
-    arc(-10)
-    line(4)
+    arc(140)
+    turn(180)
+    arc(-40)
+    turn(180)
+    space()
 
-def f():    #test
+def f():
     turn(90)
-    line(5)
-    arc(180)
+    line(3)
+    arc(-90)
     turn(180)
-    arc(-180)
-    line(-1)
-    turn(90)
-    line(2)
-    line(-4)
-    line(2)
-    turn(90)
-    line(4)
-    turn(90)
-    line(3)
-def g(): #test
-    line(3)
-    arc(360)
     arc(90)
+    line(0.7)
+    turn(90)
+    line(0.9)
+    line(-0.6)
+    line(-0.7)
+    line(0.7)
+    turn(-90)
+    line(2.3)
+    turn(90)
+    space()
+def g():
+    line(3)
+    arc(360 + 30)
+    arc(90)
+    line(0.7)
     turn(180)
-    line(4)
+    line(3)
     arc(-180)
     turn(180)
-    arc(180)
-    line(-2)
-    turn(90)
+    arc(180+20)
+    line(1.4)
+    turn(-90)
     line(3)
-def h():#test
+def h():
     turn(90)
-    line(5)
+    line(4)
     line(-3)
     arc(-180)
-    line(2)
-    rotate(90)
-    line(3)
+    line(1)
+    turn(90)
+    space()
 def i():#test
     turn(90)
-    line(3)
+    line(1)
     turn(-90)
     arc(360,0.5)    #change function to use different radii
     turn(-90)
     line(3)
     turn(90)
-    line(3)
+    space()
 def j():#test
     turn(90)
     line(3)
@@ -173,41 +210,43 @@ def j():#test
     line(2)
     turn(-90)
     line(3)
-def k():#test
+def k():
     turn(90)
-    line(5)
-    line(-3)
+    line(3)
+    line(-2)
     turn(-45)
     line(2)
-    line(-2)
+    line(-1.5)
     turn(-90)
-    line(2)
+    line(1.5)
     turn(45)
-    line(3)
-def l():#test
+    space()
+def l():
     turn(90)
-    line(5)
-    line(-5)
+    line(3)
+    line(-3)
     turn(-90)
-    line(3)
-def m():#test
+    space()
+def m():#finetune
     turn(90)
-    line(3)
+    line(1.5)
+    line(-0.5)
     arc(-180)
-    line(3)
+    line(1)
     turn(180)
-    line(3)
+    line(1)
     arc(-180)
-    line(3)
-    turn(-90)
-    line(3)
-def n():#test
+    line(1)
     turn(90)
-    line(3)
+    space()
+def n():#finetune
+    turn(90)
+    line(1.5)
+    line(-0.5)
     arc(-180)
-    line(3)
-    turn(-90)
-    line(3)
+    line(1)
+    turn(90)
+    space()
 def o():#test
     line(3)
     arc(360)
@@ -244,15 +283,15 @@ def r():#test
     line(2)
     turn(90)
     line(3)
-def s():#test   currently improportionally big, so if arc() can be changed to accomodate radii, then change s()
+def s():
     line(3)
     turn(180)
     arc(-90)
     turn(180)
     arc(270)
-    arc(-270)
+    arc(-260)
     turn(180)
-    arc(270)
+    arc(260)
     arc(-180)
     turn(180)
     line(3)
@@ -345,18 +384,33 @@ def z():#test
     turn(90)
     line(3)
 def space():
-    line(3)
-    
-    
+    line(2)
 
+m()
+n()
 #arc(360)
 #turn(360)
 #a()
 #c()
 #t()
-drawWord("cat")
+#drawWord("e")
+'''
+phrase = speech.input()
+print phrase
+drawWord (phrase)
+
+def callback(phrase, listener):
+    if phrase == "stop":
+        listener.stoplistening()
+    drawWord(phrase)
+
+listener = speech.listenforanything(callback)
+while listener.islistening():
+    time.sleep(.5)
+#So you don't have to reconnect everytime
 
 #So you don't have to reconnect everytime
+'''
 '''
 while True:
     pass
