@@ -17,6 +17,7 @@ def drawLetter(arg):
         t()
         return
     return
+	
 '''
 move(translate, rotate)
 First param: 1, forward, -1, backwards, fullspeed
@@ -35,7 +36,7 @@ def arc(degrees,radius = 1):
     print(abs(degrees)*moveTime)
     wait(abs(degrees)*moveTime)
     move(0,0)
-    wait(0.3)#Let the robot wheels recover
+    wait(0.3) #Let the robot wheels recover
 
 def line(length):
     print ("Line: " + str(length))
