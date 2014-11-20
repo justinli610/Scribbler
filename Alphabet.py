@@ -61,11 +61,8 @@ def arc(degrees):
     move(0, 0)
     wait(0.3)#Let the robot wheels recover
 
-'''
-Always move line(3) after drawing the letter to make space for the next letter
-'''
 
-#Draws an a
+#Draws letters
 #Also includes the return movements to the baseline
 def a():
     space()#To clear more space for the circle
@@ -105,7 +102,7 @@ def d():
     line(4)
     turn(90)
     space()
-def e():    #finetune
+def e():
     space()
     turn(180)
     arc(-270-20)
@@ -339,7 +336,7 @@ def z():
     turn(90)
     line(0.1)
     turn(90)
-    line(2)   #might be weird
+    line(2)
     turn(-135)
     line(2.5)
     turn(135)
