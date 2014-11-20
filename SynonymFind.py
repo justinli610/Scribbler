@@ -1,7 +1,11 @@
 import re
 import math
 import pickle
+<<<<<<< HEAD
 from WriteLetters import *
+=======
+#from WriteLetters import *
+>>>>>>> 4a5f9ec71f1b4aa82063b7c2a8f83fbbfcc12426
 
 wordList = {} #Maps words to a frequency dictionary
 # e.g. {'person' (word in list) : {'man' : 1 (word in sentence), 'woman' : 2}}
@@ -141,7 +145,50 @@ def main():
 	del wordList['rodya']
 	del wordList['properly']
 	
+<<<<<<< HEAD
 	print "Pickles ready to eat"
+=======
+	wordList = pickle.load(open("wordList3.p", "rb"))
+	
+	'''for w in wordList:
+		if wordList[w]:
+			del wordList[w]
+			count += 1'''
+			
+	del wordList['a']
+	del wordList['the']
+	del wordList['of']
+	del wordList['weve']
+	del wordList['anyway']
+	del wordList['shes']
+	del wordList['hers']
+	del wordList['hed']
+	del wordList['hes']
+	del wordList['his']
+	del wordList['him']
+	del wordList['theyve']
+	del wordList['they']
+	del wordList['theyre']
+	del wordList['i']
+	del wordList['im']
+	del wordList['id']
+	del wordList['ive']
+	del wordList['me']
+	del wordList['my']
+	del wordList['you']
+	del wordList['your']
+	del wordList['youre']
+	del wordList['yours']
+	del wordList['youve']
+	del wordList['eh']
+	del wordList['hm']
+	del wordList['stiva']
+	del wordList['dounias']
+	del wordList['rodya']
+	del wordList['properly']
+	
+	print "Loaded"
+>>>>>>> 4a5f9ec71f1b4aa82063b7c2a8f83fbbfcc12426
 	
 	#Print the list
 	'''for x in wordList:
@@ -153,8 +200,12 @@ def main():
 		input1 = raw_input()
 		choices = findMostSimilar(input1)
 		print choices
+<<<<<<< HEAD
 		drawWord(choices[0][0])#Just use the first entry
 
+=======
+		#drawWord(choices[0])
+>>>>>>> 4a5f9ec71f1b4aa82063b7c2a8f83fbbfcc12426
 		
 def reload():
 	global wordList
