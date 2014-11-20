@@ -1,24 +1,104 @@
 from myro import *
+<<<<<<< HEAD
 import speech
 import time
+=======
+from WriteAlphabet import *
+>>>>>>> d2aabe81a62f4aa45e2d67515c905d365976dc85
 
 initialize("com6")
 
 def drawWord(a):
     for i in xrange(len(a)):
         drawLetter(a[i])
+	speak(word)
 
-def drawLetter(arg):
+def drawLetter(arg):    #include other letters
     if (arg == 'a'):
         a()
+        return
+    if (arg == 'b'):
+        b()
         return
     if (arg == 'c'):
         c()
         return
+    if (arg == 'd'):
+        d()
+        return
+    if (arg == 'e'):
+        e()
+        return
+    if (arg == 'f'):
+        f()
+        return
+    if (arg == 'g'):
+        g()
+        return
+    if (arg == 'h'):
+        h()
+        return
+    if (arg == 'i'):
+        i()
+        return
+    if (arg == 'j'):
+        j()
+        return
+    if (arg == 'k'):
+        k()
+        return
+    if (arg == 'l'):
+        l()
+        return
+    if (arg == 'm'):
+        m()
+        return
+    if (arg == 'n'):
+        n()
+        return
+    if (arg == 'o'):
+        o()
+        return
+    if (arg == 'p'):
+        p()
+        return
+    if (arg == 'q'):
+        q()
+        return
+    if (arg == 'r'):
+        r()
+        return
+    if (arg == 's'):
+        s()
+        return
     if (arg == 't'):
         t()
         return
+    if (arg == 'u'):
+        u()
+        return
+    if (arg == 'v'):
+        v()
+        return
+    if (arg == 'w'):
+        w()
+        return
+    if (arg == 'x'):
+        x()
+        return
+    if (arg == 'y'):
+        y()
+        return
+    if (arg == 'z'):
+        z()
+        return
+    if (arg == ' '):
+        space()
+        space()
+        return
     return
+<<<<<<< HEAD
+	
 '''
 move(translate, rotate)
 First param: 1, forward, -1, backwards, fullspeed
@@ -37,20 +117,21 @@ def arc(degrees,radius = 1):
     print(abs(degrees)*moveTime)
     wait(abs(degrees)*moveTime)
     move(0,0)
-    wait(0.3)#Let the robot wheels recover
+    wait(0.3) #Let the robot wheels recover
+=======
+drawWord("a dog")
+'''
+phrase = speech.input()
+print phrase
+drawWord (phrase)
+>>>>>>> letters_t
 
-def line(length):
-    print ("Line: " + str(length))
-    #speed = 0.3
-    #moveTime = 0.75#Tweek this value so that it turns the correct amount
-    speed = 0.5
-    moveTime = 0.5
-    if (length >= 0):
-        forward(speed,length*moveTime)
-    else:
-        backward(speed,abs(length)*moveTime)
-    wait(0.3)#Let the robot wheels recover
+def callback(phrase, listener):
+    if phrase == "stop":
+        listener.stoplistening()
+    drawWord(phrase)
 
+<<<<<<< HEAD
 def turn(degrees):
     print ("Turn: " + str(degrees))
     #speed = 0.2
@@ -115,6 +196,7 @@ def t():
 #a()
 #c()
 #t()
+<<<<<<< HEAD
 #drawWord("cat")
 phrase = speech.input()
 print phrase
@@ -124,11 +206,21 @@ def callback(phrase, listener):
     if phrase == "stop":
         listener.stoplistening()
     drawWord(phrase)
+=======
+drawWord("cat")
+=======
+listener = speech.listenforanything(callback)
+while listener.islistening():
+    time.sleep(.5)
+#So you don't have to reconnect everytime
+>>>>>>> letters_t
+>>>>>>> d2aabe81a62f4aa45e2d67515c905d365976dc85
 
 listener = speech.listenforanything(callback)
 while listener.islistening():
     time.sleep(.5)
 #So you don't have to reconnect everytime
+'''
 '''
 while True:
     pass
