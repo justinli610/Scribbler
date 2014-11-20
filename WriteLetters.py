@@ -1,10 +1,14 @@
-from WriteAlphabet import *
+from Alphabet import *
+from myro import *
 
 initialize("com6")
 
 def drawWord(a):
     for i in xrange(len(a)):
+        speak(a[i])
         drawLetter(a[i])
+    speak(a)
+
 
 def drawLetter(arg):    #include other letters
     if (arg == 'a'):
@@ -90,7 +94,6 @@ def drawLetter(arg):    #include other letters
         space()
         return
     return
-	
 '''
 move(translate, rotate)
 First param: 1, forward, -1, backwards, fullspeed
