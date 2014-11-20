@@ -11,7 +11,8 @@ initialize("com6")
 def drawWord(a):
     for i in xrange(len(a)):
         drawLetter(a[i])
-	speak(word)
+	speak(a[i])
+    speak (word)
 
 def drawLetter(arg):    #include other letters
     if (arg == 'a'):
